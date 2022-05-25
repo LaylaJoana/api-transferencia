@@ -1,6 +1,6 @@
 # Informações gerais sobre o projeto
 
-Api de transferência bancário entre usuários.
+Api de transferência bancária entre usuários.
 
 #### Ferramentas utilizadas no projeto
 

@@ -24,3 +24,16 @@ $router->post('/user', 'UserController@createuser');
 $router->put('/user/{id}', 'UserController@update');
 $router->delete('/user/{id}', 'UserController@delete');
 
+//Routs Transaction
+$router->get('/transactions', 'TransactionController@index');
+$router->get('/transactions/{id}', 'TransactionController@show');
+
+//Routs Wallets
+$router->post('/wallet', 'WalletController@createwallet');
+$router->get('/wallet/{id}', 'WalletController@show');
+$router->get('/walles', 'WalletController@index');
+$router->post('/deposit', 'WalletController@deposit');
+$router->post('/transfer', 'WalletController@transfer');
+
+
+

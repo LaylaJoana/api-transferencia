@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,10 +14,11 @@ class UserController extends Controller
 
     protected $user;
 
-    function __construct(User $user)
+    function __construct(User $user, Wallet $wallet)
     {
 
         $this->user = $user;
+        $this->wallet = $wallet;
     }
 
     public function index(){
@@ -34,7 +36,6 @@ class UserController extends Controller
 
    public function createuser(Request $request)
     {
-
         try {
             $data = $request->all();
             $this->validate($request, [
@@ -46,6 +47,9 @@ class UserController extends Controller
             ]);
             DB::beginTransaction();
             $data = $this->user->create($data);
+            $Walletdados['id_user'] = $data['id'];
+            $Walletdados['balance'] = 0.00;
+            $this->wallet->create($Walletdados);
             DB::commit();
             return response()->json('registered successfully', 201);
         } catch (\Exception $e) {
@@ -59,10 +63,9 @@ class UserController extends Controller
         try {
             $dados = $request->all();
             $userId = $this->user->returnById($id);
-
             if (!$userId->all()) return response()->json('unregistered user', 401);
             DB::beginTransaction();
-            $user = $this->user->updateById($dados, $id);
+            $this->user->updateById($dados, $id);
             DB::commit();
             return response()->json('successfully updated', 201);
         } catch (\Exception $e) {

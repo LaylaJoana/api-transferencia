@@ -31,7 +31,7 @@ $router->get('/transactions/{id}', 'TransactionController@show');
 //Routs Wallets
 $router->post('/wallet', 'WalletController@createwallet');
 $router->get('/wallet/{id}', 'WalletController@show');
-$router->get('/walles', 'WalletController@index');
+$router->get('/wallets', 'WalletController@index');
 $router->post('/deposit', 'WalletController@deposit');
 $router->post('/transfer', 'WalletController@transfer');
 

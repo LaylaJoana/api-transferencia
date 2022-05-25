@@ -39,7 +39,7 @@ class WalletController extends Controller
 
         return response()->json($data);
     }
-    
+
     function transfer(Request $request)
     {
         $this->validate($request, [
@@ -61,7 +61,9 @@ class WalletController extends Controller
         if (($user->type) != 'comum') return response()->json(['message' => 'user without permission to transfer'], 401);
 
         if ($walletDataFrom->balance < $request->value) return response()->json(['message' => 'insufficient funds'], 401);
+        $response = Http::get('http://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6', $request);
 
+        if (!$response->ok()) return response()->json('Unauthorized', 401);
         DB::beginTransaction();
         try {
             $walletDataFrom->balance -= $request->value;
@@ -74,7 +76,8 @@ class WalletController extends Controller
                 'id_user_to' => $request->id_user_to,
                 'value' => $request->value
             ]);
-
+            $response = Http::get('http://o4d9z.mocklab.io/notify');
+            if (!$response->ok()) return response()->json('failed to notify', 500);
             DB::commit();
             return response()->json('transfer successfully',201);
         } catch (\Exception $e) {
@@ -103,7 +106,7 @@ class WalletController extends Controller
         } catch (\Exception $e) {
             dd($e->getMessage());
             DB::rollBack();
-            return response()->json(['message' => 'Oops, there was an error with your deposit'], 500);
+            return response()->json(['message' => 'there was an error with your deposit'], 500);
         }
     }
 

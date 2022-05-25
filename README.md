@@ -12,11 +12,11 @@ Api de transferência bancário entre usuários.
 **Rotas para Usuario**
 |Métodos| Parâmetros | Descrição |
 |---|---|---|
-|`GET`| `/api/users` | Retorna um JSON com todos os usuário. |
-|`GET`| `/api/user/{id}` | Retorna o usurário usando id do usuario. |
-|`POST`| `/api/user` | Efetua o cadastro de um usuário. |
-|`PUT`| `/api/user/update/{id}` | Atualiza um usaurio. |
-|`DELETE`| `/api/user/delete/{id}` | Deleta o usurário usando id do usuario. |
+|`GET`| `/api/users` | Retorna um JSON com todos os usuários. |
+|`GET`| `/api/user/{id}` | Retorna o usuário específico. |
+|`POST`| `/api/user` | Realiza o cadastro de um usuário. |
+|`PUT`| `/api/user/update/{id}` | Atualiza um usuário específico. |
+|`DELETE`| `/api/user/delete/{id}` | Deleta o usuário usuário específico. |
 
 **Rotas para Carrteira**
 |Métodos| Parâmetros | Descrição |
